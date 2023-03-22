@@ -159,3 +159,14 @@ bundle add will_paginate
 ```bash
 bundle add will_paginate-bootstrap-style
 ```
+
+## Create seed data in db/seeds.rb
+```rb
+admin = User.create(first_name: 'Nguyen', last_name: 'Son', email: 'son@example.com', password: 'demo2023', password_confirmation: 'demo2023', is_admin: true)
+```
+
+**Run db:seed**
+```bash
+rails db:seed
+```
+
