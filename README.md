@@ -32,3 +32,7 @@ test:
 ```bash
 rails db:create
 ```
+## Setup Bootstrap jquery select2
+```bash
+yarn add bootstrap jquery @popperjs/core select2
+```
