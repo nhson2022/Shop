@@ -117,3 +117,23 @@ bin/rails action_text:install
 bin/rails db:migrate
 ```
 
+## Create pages home and about
+```bash
+rails g controller pages home about
+```
+**Update routes**
+```rb
+root "pages#home"
+get "/about" => "pages#about", as: :pages_about
+```
+
+## Create Category model, controller, view (scaffold)
+```bash
+rails g scaffold Category name description:text
+```
+
+## Create Product model, controller, view (scaffold)
+```bash
+rails g scaffold Product title active:boolean quantity:integer price:integer category:references
+```
+
