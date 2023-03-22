@@ -77,3 +77,7 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+
+gem "will_paginate", "~> 3.3"
+
+gem "will_paginate-bootstrap-style", "~> 0.2.4"

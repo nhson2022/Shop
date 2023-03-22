@@ -137,3 +137,25 @@ rails g scaffold Category name description:text
 rails g scaffold Product title active:boolean quantity:integer price:integer category:references
 ```
 
+**Create category_select_options helper method in app/helpers/application_helper.rb**
+```rb
+# app/helpers/application_helper.rb
+def category_select_options
+  Category.all.map { |c| [c.name, c.id] }
+end
+```
+
+**Migration database**
+```bash
+rails db:migrate
+```
+
+## Setup gem will_paginate for pagination
+```bash
+# https://github.com/mislav/will_paginate
+bundle add will_paginate
+```
+**Will Paginate link renderer bootstrap styles**
+```bash
+bundle add will_paginate-bootstrap-style
+```
