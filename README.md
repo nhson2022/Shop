@@ -36,3 +36,13 @@ rails db:create
 ```bash
 yarn add bootstrap jquery @popperjs/core select2
 ```
+**Update app/assets/stylesheets/application.sass.scss**
+```scss
+@import "bootstrap/dist/css/bootstrap";
+@import "select2/dist/css/select2";
+```
+
+## Create Address model, controller, view (scaffold)
+```bash
+rails g scaffold Address town:text phone:string
+```
