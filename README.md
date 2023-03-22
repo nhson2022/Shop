@@ -170,3 +170,4 @@ admin = User.create(first_name: 'Nguyen', last_name: 'Son', email: 'son@example.
 rails db:seed
 ```
 
+## Bootstrap style for all pages
