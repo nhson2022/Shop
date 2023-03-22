@@ -69,7 +69,7 @@ document.addEventListener('turbo:load', () => {
 rails g scaffold Address town:text phone:string
 ```
 
-## Create User for Devise
+## Setup Devise for User
 ```bash
 bundle add devise
 rails generate devise:install
@@ -86,5 +86,34 @@ config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 ```bash
 bin/rails generate migration AddIsAdminToUsers is_admin:boolean first_name:text last_name:text
 ```
+**Update app/views/layouts/application.html.erb**
+```html
+<div class="container">
+  <% if notice.present? %>
+    <div class="alert alert-primary mt-4" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <% if alert.present? %>
+    <div class="alert alert-danger mt-4" role="alert">
+      <%= alert %>
+    </div>
+  <% end %>
+
+  <%= yield %>
+</div>
+```
 
 ## Setup Active Storage
+```bash
+bin/rails active_storage:install
+bin/rails db:migrate
+```
+
+## Setup Action Text
+```bash
+bin/rails action_text:install
+bin/rails db:migrate
+```
+

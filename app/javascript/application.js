@@ -15,4 +15,5 @@ Select2()
 document.addEventListener('turbo:load', () => {
   // apply to all elements that have class .select2
   $('.select2').select2()
-})
+})import "trix"
+import "@rails/actiontext"
