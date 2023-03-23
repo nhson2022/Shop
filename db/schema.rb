@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_22_142934) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_23_074721) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -56,11 +56,34 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_142934) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "carts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "quantity"
+    t.integer "money"
+    t.bigint "product_id", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_carts_on_product_id"
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "paid"
+    t.bigint "cart_id"
+    t.bigint "user_id"
+    t.bigint "address_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_payments_on_address_id"
+    t.index ["cart_id"], name: "index_payments_on_cart_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -91,5 +114,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_142934) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "carts", "products"
+  add_foreign_key "carts", "users"
+  add_foreign_key "payments", "addresses"
+  add_foreign_key "payments", "carts"
+  add_foreign_key "payments", "users"
   add_foreign_key "products", "categories"
 end

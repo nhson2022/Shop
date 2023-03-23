@@ -1,6 +1,22 @@
-<div>
-	<%= render 'layouts/header' %>
-</div>
-<div>
-	<%= render 'layouts/footer' %>
+<div class="row py-4">
+	<div class="col-lg-4">
+		<div class="text-danger">Categories</div>
+		<div class="list-group">
+			<% @categories.each do |category| %>
+				<a href="<%= products_path(cid: category.id) %>" class="list-group-item list-group-item-action"><%= category.name %></a>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-lg-8">
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title">Products</h5>
+				<div id="products">
+					<% @products.each do |product| %>
+						<%= render product %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

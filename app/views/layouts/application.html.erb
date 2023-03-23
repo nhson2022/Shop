@@ -8,6 +8,7 @@
 		<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 		<%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 	</head>
+	<%= render 'layouts/header' %>
 	<body>
 		<div class="container">
 			<% if notice.present? %>
@@ -23,6 +24,7 @@
 			<%= yield %>
 		</div>
 	</body>
+	<%= render 'layouts/footer' %>
 	<!-- app/views/layouts/application.html.erb -->
 	<dialog id="turbo-confirm">
 		<form method="dialog">
