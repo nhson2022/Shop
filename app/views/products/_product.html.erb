@@ -1,18 +1,33 @@
 <div id="<%= dom_id product %>">
-	<p>
-		<strong>Title:</strong>
-		<%= product.title %>
-	</p>
-	<p>
-		<strong>Quantity:</strong>
-		<%= product.quantity %>
-	</p>
-	<p>
-		<strong>Price:</strong>
-		<%= product.price %>
-	</p>
-	<p>
-		<strong>Category:</strong>
-		<%= product.category_id %>
-	</p>
+	<div class="card mb-3">
+		<div class="card-body">
+			<h5 class="card-title text-danger"><%= product.title %></h5>
+			<% if product.avatar.attached? %>
+				<div>
+					<%= image_tag product.avatar.variant(:thumb), class: "card-image-top" %>
+				</div>
+			<% end %>
+			<div>
+				<strong>Description:</strong>
+				<%= product.description %>
+			</div>
+			<div>
+				<strong>Quantity:</strong>
+				<%= product.quantity %>
+			</div>
+			<div>
+				<strong>Price:</strong>
+				<%= product.price %>
+			</div>
+			<div>
+				<strong>Category:</strong>
+				<%= product.category&.name || 'None' %>
+			</div>
+			<a href="#" class="btn btn-primary">Buy</a>
+			<a href="#" class="btn btn-secondary">Add to Cart</a>
+		</div>
+
+	</div>
+	<%= link_to "Show", product, class: 'btn btn-sm btn-info mb-1 mx-1' %>
 </div>
+
