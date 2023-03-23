@@ -16,5 +16,20 @@ document.addEventListener('turbo:load', () => {
   // apply to all elements that have class .select2
   $('.select2').select2()
 })
+
 import "trix"
 import "@rails/actiontext"
+
+// app/javascript/application.js
+Turbo.setConfirmMethod((message, element) => {
+  console.log(message, element)
+  let dialog = document.getElementById("turbo-confirm")
+  dialog.querySelector("p").textContent = message
+  dialog.showModal()
+
+  return new Promise((resolve, reject) => {
+    dialog.addEventListener("close", () => {
+      resolve(dialog.returnValue == "confirm")
+    }, { once: true })
+  })
+})

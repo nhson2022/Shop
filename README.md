@@ -163,6 +163,7 @@ bundle add will_paginate-bootstrap-style
 ## Create seed data in db/seeds.rb
 ```rb
 admin = User.create(first_name: 'Nguyen', last_name: 'Son', email: 'son@example.com', password: 'demo2023', password_confirmation: 'demo2023', is_admin: true)
+
 ```
 
 **Run db:seed**
@@ -171,3 +172,64 @@ rails db:seed
 ```
 
 ## Bootstrap style for all pages
+
+## Custom Turbo Confirm Modals with Hotwire in Rails
+**Update layout application.html.erb**
+```html
+<!-- app/views/layouts/application.html.erb -->
+<dialog id="turbo-confirm">
+  <form method="dialog">
+    <p>Are you sure?</p>
+    <div>
+      <button value="cancel">Cancel</button>
+      <button value="confirm">Confirm</button>
+    </div>
+  </form>
+</dialog>
+```
+
+**Update application.js**
+```js
+// app/javascript/application.js
+Turbo.setConfirmMethod((message, element) => {
+  console.log(message, element)
+  let dialog = document.getElementById("turbo-confirm")
+  dialog.querySelector("p").textContent = message
+  dialog.showModal()
+
+  return new Promise((resolve, reject) => {
+    dialog.addEventListener("close", () => {
+      resolve(dialog.returnValue == "confirm")
+    }, { once: true })
+  })
+})
+```
+
+## Implement search products
+**Create this static method in product model**
+```rb
+# app/models/product.rb
+
+def self.search(params)
+  if params[:q].present?
+    return includes(:user).with_rich_text_content_and_embeds
+              .where("LOWER(title) LIKE LOWER(?)", "%#{params[:q].to_s.squish}%")
+              .order(id: :desc)
+              .paginate(page: params[:page] || 1, per_page: 10)
+  end
+
+  includes(:user).with_rich_text_content_and_embeds
+    .order(id: :desc)
+    .paginate(page: params[:page] || 1, per_page: 10)
+end
+```
+
+## Create Cart model, controller, view (scaffold)
+```bash
+rails g scaffold Cart quantity:integer money:integer product:references user:references
+```
+
+## Create Payment model, controller, view (scaffold)
+```bash
+rails g scaffold Payment paid:integer cart:references user:references address:references
+```
