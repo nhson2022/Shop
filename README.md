@@ -233,3 +233,4 @@ rails g scaffold Cart quantity:integer money:integer product:references user:ref
 ```bash
 rails g scaffold Payment paid:integer cart:references user:references address:references
 ```
+
